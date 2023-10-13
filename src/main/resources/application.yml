@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/suai_event
+    username: postgres
+    password: 1111
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 100MB
+      enabled: true
+  config:
+    import: optional:secrets.properties
+  sql:
+    init:
+      mode: always
+logging:
+  level:
+    org.springframework: error

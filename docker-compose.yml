@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'postgres:14-bullseye'
+    container_name: 'logistics-postgres'
+    environment:
+      - 'POSTGRES_USER=postgres'
+      - 'POSTGRES_PASSWORD=1111'
+      - 'POSTGRES_DB=logistics'
+  app:
+    build: ./
+    container_name: 'logistics-app'
+    ports:
+      - "8080:8080"
