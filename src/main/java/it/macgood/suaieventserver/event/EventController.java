@@ -29,9 +29,16 @@ public class EventController {
         }
     }
 
+    @GetMapping("/contests/byTag")
+    public ResponseEntity<List<Contest>> getContestsByTag(
+            @RequestParam String tag
+    ) {
+        return ResponseEntity.ok(eventService.getContestsByTag(tag));
+    }
+
+
     @GetMapping("/contests")
     public ResponseEntity<List<Contest>> getAllContests() {
-
         try {
             List<Contest> latestContests = eventService.getLatestContests();
             return ResponseEntity.ok(latestContests);

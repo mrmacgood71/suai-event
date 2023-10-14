@@ -8,6 +8,7 @@ import it.macgood.suaieventserver.event.repository.EventRepository;
 import it.macgood.suaieventserver.user.model.Student;
 import it.macgood.suaieventserver.user.repository.StudentRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -55,6 +56,7 @@ public class EventService {
     public List<Contest> getLatestContests() {
         return contestRepository.findAll();
     }
+
     public List<Event> getLatestEvents() {
         return eventRepository.findAll();
     }
@@ -170,5 +172,85 @@ public class EventService {
         Optional<Student> student = studentRepository.findById(id);
 
         return student.get().getContests();
+    }
+
+    public List<Contest> getContestsByTag(String tag) {
+        List<Contest> response = new ArrayList<>();
+        switch (tag) {
+            case "Беспилотники":
+                try {
+                    response = contestRepository.findAll()
+                            .stream()
+                            .filter(contest -> contest.getTag().equals("Беспилотники"))
+                            .toList();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+            case "Soft Skills":
+                try {
+                    response = contestRepository.findAll()
+                            .stream()
+                            .filter(contest -> contest.getTag().equals("Soft Skills"))
+                            .toList();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+            case "IT/Программирование":
+                try {
+                    response = contestRepository.findAll()
+                            .stream()
+                            .filter(contest -> contest.getTag().equals("IT/Программирование"))
+                            .toList();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+            case "Радиоэлектроника":
+                try {
+                    response = contestRepository.findAll()
+                            .stream()
+                            .filter(contest -> contest.getTag().equals("Радиоэлектроника"))
+                            .toList();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+            case "Социальные":
+                try {
+                    response = contestRepository.findAll()
+                            .stream()
+                            .filter(contest -> contest.getTag().equals("Социальные"))
+                            .toList();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+            case "Развлекательные":
+                try {
+                    response = contestRepository.findAll()
+                            .stream()
+                            .filter(contest -> contest.getTag().equals("Развлекательные"))
+                            .toList();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+            default:
+                try {
+                    response = contestRepository.findAll();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+        }
     }
 }

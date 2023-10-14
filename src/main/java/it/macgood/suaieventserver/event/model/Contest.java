@@ -44,6 +44,7 @@ public class Contest {
     @Column(columnDefinition = "TEXT")
     @JsonView(View.GetUserInfo.class)
     private String link;
+    private String tag;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "student_contest",
