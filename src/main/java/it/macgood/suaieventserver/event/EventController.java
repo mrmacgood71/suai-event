@@ -30,6 +30,7 @@ public class EventController {
     }
 
     @GetMapping("/contests/byTag")
+    @JsonView(View.GetUserInfo.class)
     public ResponseEntity<List<Contest>> getContestsByTag(
             @RequestParam String tag
     ) {
@@ -37,6 +38,7 @@ public class EventController {
     }
 
     @GetMapping("/events/byTag")
+    @JsonView(View.GetUserInfo.class)
     public ResponseEntity<List<Event>> getEventsByTag(
             @RequestParam String tag
     ) {
@@ -108,7 +110,6 @@ public class EventController {
     @GetMapping("/events/withStatus")
     @JsonView(View.GetUserInfo.class)
     public ResponseEntity<List<Event>> getNotApplied() {
-//        return null;
         return ResponseEntity.ok(eventService.getNotAppliedEvents());
     }
 
