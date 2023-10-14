@@ -364,4 +364,12 @@ public class EventService {
         Contest saved = contestRepository.save(byId);
         return saved;
     }
+
+    public Event linkEventToUser(String eventId, String studentId) {
+        Event event = eventRepository.findById(Long.parseLong(eventId)).get();
+        Student student = studentRepository.findById(studentId).get();
+        event.getStudents().add(student);
+        Event save = eventRepository.save(event);
+        return save;
+    }
 }

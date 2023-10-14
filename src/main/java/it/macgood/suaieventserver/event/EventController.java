@@ -69,6 +69,15 @@ public class EventController {
         return ResponseEntity.ok(eventService.addContest(contest));
     }
 
+    @PostMapping("/events/{eventId}/{studentId}")
+    @JsonView(View.GetUserInfo.class)
+    public ResponseEntity<Event> linkToEvent(
+            @PathVariable String eventId,
+            @PathVariable String studentId
+    ) {
+        return ResponseEntity.ok(eventService.linkEventToUser(eventId, studentId));
+    }
+
     @GetMapping("/events/byStudent/{id}")
     @JsonView(View.GetUserInfo.class)
     public ResponseEntity<List<Event>> getEventsByUserId(
@@ -100,7 +109,7 @@ public class EventController {
     }
 
     @GetMapping("/events/{id}")
-    @JsonView(View.GetUserInfo.class)
+    @JsonView(View.GetEventInfo.class)
     public ResponseEntity<Event> getEventsById(
             @PathVariable String id
     ) {

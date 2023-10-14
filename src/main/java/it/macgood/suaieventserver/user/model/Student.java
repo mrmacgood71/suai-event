@@ -19,21 +19,21 @@ import java.util.List;
 @Table
 public class Student {
     @Id
-    @JsonView(View.GetUserInfo.class)
+    @JsonView({View.GetUserInfo.class, View.GetEventInfo.class})
     private String id;
-    @JsonView(View.GetUserInfo.class)
+    @JsonView({View.GetUserInfo.class, View.GetEventInfo.class})
     private String identificationNumber;
-    @JsonView(View.GetUserInfo.class)
+    @JsonView({View.GetUserInfo.class, View.GetEventInfo.class})
     private String firstname;
-    @JsonView(View.GetUserInfo.class)
+    @JsonView({View.GetUserInfo.class, View.GetEventInfo.class})
     private String lastname;
-    @JsonView(View.GetUserInfo.class)
+    @JsonView({View.GetUserInfo.class, View.GetEventInfo.class})
     private String groupNumber;
-    @JsonView(View.GetUserInfo.class)
+    @JsonView({View.GetUserInfo.class, View.GetEventInfo.class})
     private String patronymic;
 
     @ManyToMany(mappedBy = "students")
-    @JsonView(View.GetUserInfo.class)
+    @JsonView({View.GetUserInfo.class})
     private List<Event> events = new ArrayList<>();
 
     @ManyToMany(mappedBy = "students")
