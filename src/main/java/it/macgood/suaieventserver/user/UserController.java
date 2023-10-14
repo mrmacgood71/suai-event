@@ -5,6 +5,7 @@ import it.macgood.suaieventserver.user.model.*;
 import it.macgood.suaieventserver.view.View;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,6 +23,19 @@ public class UserController {
     @JsonView(View.GetUserInfo.class)
     public ResponseEntity<List<Student>> getStudents() {
         return ResponseEntity.ok(userService.getAllStudents());
+    }
+
+    @GetMapping(value = "/admins/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @JsonView(View.GetUserInfo.class)
+    public ResponseEntity<String> getAdminById(
+            @PathVariable String id
+    ) {
+        try {
+            Administrator adminById = userService.getAdminById(id);
+            return ResponseEntity.ok("True");
+        } catch (Exception e) {
+            return ResponseEntity.ok("False");
+        }
     }
 
     @GetMapping("/students/{id}")

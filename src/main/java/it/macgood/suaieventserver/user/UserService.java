@@ -43,6 +43,11 @@ public class UserService {
         return studentRepository.findById(id).get();
     }
 
+    public Administrator getAdminById(String id) {
+        return administratorRepository.findById(id).get();
+    }
+
+
     public ResponseAchievement addAchievement(Achievement achievement, String id) {
         Student student = studentRepository.findById(id).get();
         achievement.setStudentId(student.getId());
