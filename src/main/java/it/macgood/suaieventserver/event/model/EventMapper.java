@@ -4,7 +4,6 @@ public class EventMapper {
     public static Event toEvent(SuaiEvent suaiEvent) {
 
         return Event.builder()
-                .id(1L)
                 .name(suaiEvent.getTitle())
                 .regStartDate(suaiEvent.getDateBegin())
                 .regEndDate(suaiEvent.getDateDeadline())
@@ -20,7 +19,6 @@ public class EventMapper {
 
     public static Contest toContest(SuaiContest suaiContest) {
         return Contest.builder()
-                .id(1L)
                 .name(suaiContest.getTitle())
                 .regStartDate(suaiContest.getDataAnnounce())
                 .regEndDate(suaiContest.getDateDeadline())

@@ -1,22 +1,22 @@
 package it.macgood.suaieventserver.event;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import it.macgood.suaieventserver.event.model.*;
 import it.macgood.suaieventserver.event.repository.ContestRepository;
 import it.macgood.suaieventserver.event.repository.EventRepository;
+import it.macgood.suaieventserver.user.model.Student;
+import it.macgood.suaieventserver.user.repository.StudentRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -24,11 +24,51 @@ public class EventService {
 
     private final ContestRepository contestRepository;
     private final EventRepository eventRepository;
+    private final StudentRepository studentRepository;
 //    private final SuaiConferencesRepository suaiConferencesRepository;
 //    private final SuaiEventRepository suaiEventRepository;
 
 
-    public List<Contest> getLatestContests() throws IOException {
+    public void saveAll() throws IOException {
+        try {
+            contestRepository.deleteAll();
+            eventRepository.deleteAll();
+            List<Contest> latestContests = getParsedLatestContests();
+            List<Contest> contests = contestRepository.saveAll(latestContests);
+            List<Event> latestEvents = getParsedLatestEvents();
+            List<Event> events = eventRepository.saveAll(latestEvents);
+            System.out.println(contests);
+            System.out.println(events);
+        } catch (Exception e) {
+            System.out.println("asdf");
+        }
+    }
+
+    public Contest addContest(Contest contest) {
+        return contestRepository.save(contest);
+    }
+
+    public Event addEvent(Event event) {
+        return eventRepository.save(event);
+    }
+
+    public List<Contest> getLatestContests() {
+        return contestRepository.findAll();
+    }
+    public List<Event> getLatestEvents() {
+        return eventRepository.findAll();
+    }
+
+    public Event getEventById(String id) {
+        return eventRepository.findById(Long.parseLong(id)).get();
+    }
+
+    public Contest getContestById(String id) {
+        return contestRepository.findById(Long.parseLong(id)).get();
+    }
+
+
+    public List<Contest> getParsedLatestContests() throws IOException {
         List<SuaiContest> suaiContests = getSuaiContests();
 
         List<Contest> contests;
@@ -41,7 +81,7 @@ public class EventService {
                         if (Integer.parseInt(s) > 2023) {
                             return true;
                         } else if (Integer.parseInt(s) == 2023) {
-                            return Integer.parseInt(s) >= 10;
+                            return Integer.parseInt(s1) >= 10;
                         } else {
                             return false;
                         }
@@ -56,7 +96,7 @@ public class EventService {
         return contests;
     }
 
-    public List<Event> getAllEvents() throws IOException {
+    public List<Event> getParsedLatestEvents() throws IOException {
         List<SuaiEvent> suaiContests = getSuaiConferences();
 
         List<Event> contests;
@@ -69,7 +109,7 @@ public class EventService {
                         if (Integer.parseInt(s) > 2023) {
                             return true;
                         } else if (Integer.parseInt(s) == 2023) {
-                            return Integer.parseInt(s) >= 10;
+                            return Integer.parseInt(s1) >= 10;
                         } else {
                             return false;
                         }
@@ -120,4 +160,15 @@ public class EventService {
         return suaiEvent;
     }
 
+    public List<Event> getEventByStudentId(String id) {
+        Optional<Student> student = studentRepository.findById(id);
+
+        return student.get().getEvents();
+    }
+
+    public List<Contest> getContestByStudentId(String id) {
+        Optional<Student> student = studentRepository.findById(id);
+
+        return student.get().getContests();
+    }
 }

@@ -5,15 +5,16 @@ import lombok.AllArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import java.io.IOException;
+
 @Component
 @AllArgsConstructor
 public class ScheduledTasks {
 
     private final EventService eventService;
 
-    @Scheduled(cron = "0 7 1 * * ?")
-    public void updateEventsData() {
-
-
+    @Scheduled(cron = "0 46 2 * * ?")
+    public void updateEventsData() throws IOException {
+        eventService.saveAll();
     }
 }
