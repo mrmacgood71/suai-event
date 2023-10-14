@@ -253,4 +253,84 @@ public class EventService {
                 return response;
         }
     }
+
+    public List<Event> getEventsByTag(String tag) {
+        List<Event> response = new ArrayList<>();
+        switch (tag) {
+            case "Беспилотники":
+                try {
+                    response = eventRepository.findAll()
+                            .stream()
+                            .filter(contest -> contest.getTags().contains("Беспилотники"))
+                            .toList();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+            case "Soft Skills":
+                try {
+                    response = eventRepository.findAll()
+                            .stream()
+                            .filter(contest -> contest.getTags().contains("Soft Skills"))
+                            .toList();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+            case "IT/Программирование":
+                try {
+                    response = eventRepository.findAll()
+                            .stream()
+                            .filter(contest -> contest.getTags().contains("IT/Программирование"))
+                            .toList();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+            case "Радиоэлектроника":
+                try {
+                    response = eventRepository.findAll()
+                            .stream()
+                            .filter(contest -> contest.getTags().contains("Радиоэлектроника"))
+                            .toList();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+            case "Социальные":
+                try {
+                    response = eventRepository.findAll()
+                            .stream()
+                            .filter(contest -> contest.getTags().contains("Социальные"))
+                            .toList();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+            case "Развлекательные":
+                try {
+                    response = eventRepository.findAll()
+                            .stream()
+                            .filter(contest -> contest.getTags().contains("Развлекательные"))
+                            .toList();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+            default:
+                try {
+                    response = eventRepository.findAll();
+                } catch (Exception e) {
+
+                }
+
+                return response;
+        }
+    }
 }

@@ -36,6 +36,12 @@ public class EventController {
         return ResponseEntity.ok(eventService.getContestsByTag(tag));
     }
 
+    @GetMapping("/events/byTag")
+    public ResponseEntity<List<Event>> getEventsByTag(
+            @RequestParam String tag
+    ) {
+        return ResponseEntity.ok(eventService.getEventsByTag(tag));
+    }
 
     @GetMapping("/contests")
     public ResponseEntity<List<Contest>> getAllContests() {
@@ -83,6 +89,7 @@ public class EventController {
     }
 
     @GetMapping("/contests/{id}")
+    @JsonView(View.GetUserInfo.class)
     public ResponseEntity<Contest> getContestById(
             @PathVariable String id
     ) {
@@ -90,11 +97,11 @@ public class EventController {
     }
 
     @GetMapping("/events/{id}")
+    @JsonView(View.GetUserInfo.class)
     public ResponseEntity<Event> getEventsById(
             @PathVariable String id
     ) {
         return ResponseEntity.ok(eventService.getEventById(id));
     }
-
 
 }
