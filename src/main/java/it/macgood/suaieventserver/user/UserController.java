@@ -46,7 +46,7 @@ public class UserController {
         return ResponseEntity.ok(userService.getStudentById(id));
     }
 
-    @GetMapping("/student/{id}/addAchievement")
+    @PostMapping("/student/{id}/addAchievement")
     public ResponseEntity<ResponseAchievement> addAchievement(
             @PathVariable String id,
             @RequestBody Achievement achievement
