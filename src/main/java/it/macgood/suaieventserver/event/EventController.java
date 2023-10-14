@@ -66,6 +66,7 @@ public class EventController {
     ) {
         return ResponseEntity.ok(eventService.addContest(contest));
     }
+
     @GetMapping("/events/byStudent/{id}")
     @JsonView(View.GetUserInfo.class)
     public ResponseEntity<List<Event>> getEventsByUserId(
@@ -104,4 +105,27 @@ public class EventController {
         return ResponseEntity.ok(eventService.getEventById(id));
     }
 
+    @GetMapping("/events/withStatus")
+    public ResponseEntity<List<Event>> getNotApplied() {
+        return ResponseEntity.ok(eventService.getNotAppliedEvents());
+    }
+
+    @GetMapping("/contests/withStatus")
+    public ResponseEntity<List<Contest>> getNotAppliedContest() {
+        return ResponseEntity.ok(eventService.getNotAppliedContests());
+    }
+
+    @PostMapping("/events/{id}/apply")
+    public ResponseEntity<Event> applyEvent(
+            @PathVariable String id
+    ) {
+        return ResponseEntity.ok(eventService.applyEvent(id));
+    }
+
+    @PostMapping("/contest/{id}/apply")
+    public ResponseEntity<Contest> applyContest(
+            @PathVariable String id
+    ) {
+        return ResponseEntity.ok(eventService.applyContest(id));
+    }
 }

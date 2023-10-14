@@ -49,6 +49,8 @@ public class Event {
     @Column(columnDefinition = "TEXT")
     @JsonView(View.GetUserInfo.class)
     private String info;
+    @JsonView(View.GetUserInfo.class)
+    private String status;
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "student_event",

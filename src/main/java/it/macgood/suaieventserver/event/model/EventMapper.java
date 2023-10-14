@@ -13,6 +13,7 @@ public class EventMapper {
                 .organiser(suaiEvent.getOrganiser())
                 .tags(suaiEvent.getTags())
                 .link(suaiEvent.getSiteLink())
+                .status("yes")
                 .build();
 
     }
@@ -25,6 +26,7 @@ public class EventMapper {
                 .eventStartDate(suaiContest.getDataAnnounce())
                 .eventEndDate(suaiContest.getDateOff())
                 .place("")
+                .status("yes")
                 .value(suaiContest.getValue())
                 .period(suaiContest.getPeriod())
                 .link(suaiContest.getSiteLink())

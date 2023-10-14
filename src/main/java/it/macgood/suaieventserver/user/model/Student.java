@@ -32,7 +32,6 @@ public class Student {
     @JsonView(View.GetUserInfo.class)
     private String patronymic;
 
-
     @ManyToMany(mappedBy = "students")
     @JsonView(View.GetUserInfo.class)
     private List<Event> events = new ArrayList<>();

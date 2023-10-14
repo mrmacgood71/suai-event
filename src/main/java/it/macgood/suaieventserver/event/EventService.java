@@ -61,6 +61,22 @@ public class EventService {
         return eventRepository.findAll();
     }
 
+    public List<Event> getNotAppliedEvents() {
+        List<Event> notApplied = eventRepository.findAll()
+                .stream()
+                .filter(event -> event.getStatus().equals("no"))
+                .toList();
+        return notApplied;
+    }
+
+    public List<Contest> getNotAppliedContests() {
+        List<Contest> notApplied = contestRepository.findAll()
+                .stream()
+                .filter(event -> event.getStatus().equals("no"))
+                .toList();
+        return notApplied;
+    }
+
     public Event getEventById(String id) {
         return eventRepository.findById(Long.parseLong(id)).get();
     }
@@ -332,5 +348,20 @@ public class EventService {
 
                 return response;
         }
+    }
+
+    public Event applyEvent(String id) {
+        Event byId = eventRepository.findById(Long.parseLong(id)).get();
+        byId.setStatus("yes");
+        Event saved = eventRepository.save(byId);
+        return saved;
+    }
+
+    public Contest applyContest(String id) {
+        Contest byId = contestRepository.findById(Long.parseLong(id)).get();
+        byId.setStatus("yes");
+
+        Contest saved = contestRepository.save(byId);
+        return saved;
     }
 }
