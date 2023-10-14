@@ -70,7 +70,7 @@ public class EventController {
     }
 
     @PostMapping("/events/{eventId}/{studentId}")
-    @JsonView(View.GetUserInfo.class)
+    @JsonView(View.GetEventInfo.class)
     public ResponseEntity<Event> linkToEvent(
             @PathVariable String eventId,
             @PathVariable String studentId
