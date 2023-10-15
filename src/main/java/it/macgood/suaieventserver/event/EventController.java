@@ -19,6 +19,7 @@ public class EventController {
     private final EventService eventService;
 
     @GetMapping("/events")
+    @JsonView(View.GetEventInfo.class)
     public ResponseEntity<List<Event>> getAllEvents() {
 
         try {
@@ -30,7 +31,7 @@ public class EventController {
     }
 
     @GetMapping("/contests/byTag")
-    @JsonView(View.GetUserInfo.class)
+    @JsonView(View.GetEventInfo.class)
     public ResponseEntity<List<Contest>> getContestsByTag(
             @RequestParam String tag
     ) {
@@ -38,7 +39,7 @@ public class EventController {
     }
 
     @GetMapping("/events/byTag")
-    @JsonView(View.GetUserInfo.class)
+    @JsonView(View.GetEventInfo.class)
     public ResponseEntity<List<Event>> getEventsByTag(
             @RequestParam String tag
     ) {
@@ -79,7 +80,7 @@ public class EventController {
     }
 
     @GetMapping("/events/byStudent/{id}")
-    @JsonView(View.GetUserInfo.class)
+    @JsonView(View.GetEventInfo.class)
     public ResponseEntity<List<Event>> getEventsByUserId(
             @PathVariable String id
     ) {
